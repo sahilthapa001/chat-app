@@ -1,0 +1,97 @@
+/* CSS for Login Container */
+.loginContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100vh;
+	background-color: rgba(201, 223, 196, 0.397);
+	margin: 0;
+}
+
+/* CSS for Sub-Main Container */
+.subMain {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 80%;
+	max-width: 400px;
+	box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 25px;
+	background-color: rgb(215, 209, 235);
+	padding: 20px;
+}
+
+/* CSS for User Image */
+.profile {
+	height: 120px;
+	width: 120px;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+/* CSS for Input Containers */
+.inputContainer {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+}
+/* CSS for Login Title */
+.loginTitle {
+	font-size: 24px; /* Adjust the font size as needed */
+	color: #333; /* Change the text color to your preference */
+	margin-bottom: 20px; /* Add some spacing below the title */
+	text-align: center; /* Center-align the title */
+}
+
+/* CSS for Input Icons */
+.icon {
+	height: 25px;
+	width: 25px;
+	margin-right: 15px;
+	border-radius: 20%;
+}
+
+/* CSS for Input Fields */
+.inputField {
+	flex-grow: 1;
+	height: 50px;
+	border-radius: 25px;
+	box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.2);
+	border: none;
+	outline: none;
+	padding: 10px;
+	font-size: 18px;
+}
+
+/* CSS for Login Button */
+.gotoDashboardButton {
+	width: 100%;
+	height: 50px;
+	border-radius: 25px;
+	background-color: #b103fc;
+	color: white;
+	font-size: 20px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s;
+}
+
+.gotoDashboardButton:hover {
+	background-color: #9400c0;
+}
+
+/* CSS for Links */
+.links {
+	text-align: center;
+}
+
+.p a {
+	color: blue;
+	text-decoration: none;
+	font-weight: bold;
+}
+
+.p a:hover {
+	text-decoration: underline;
+}
