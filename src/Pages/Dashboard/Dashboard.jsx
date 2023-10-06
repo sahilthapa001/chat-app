@@ -3,7 +3,7 @@ import styles from "./styles.module.css";
 import { VscSend } from "react-icons/vsc";
 import { FaBold, FaItalic, FaUnderline, FaRegFile } from "react-icons/fa";
 import { LuPlusCircle } from "react-icons/lu";
-function Registration() {
+function Dashboard() {
 	return (
 		<div>
 			<div className={styles.dashboardContainer}>
@@ -19,7 +19,7 @@ function Registration() {
 								</button>
 							</div>
 						</div>
-
+		
 						<div className={styles.messageBox}>
 							<div className={styles.username}>
 								<div className={styles.insideUsername}>
@@ -171,4 +171,4 @@ function Registration() {
 	);
 }
 
-export default Registration;
+export default Dashboard;
