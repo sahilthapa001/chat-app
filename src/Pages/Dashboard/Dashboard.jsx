@@ -19,6 +19,70 @@ function Registration() {
 								</button>
 							</div>
 						</div>
+
+						<div className={styles.messageBox}>
+							<div className={styles.username}>
+								<div className={styles.insideUsername}>
+									<img
+										src="/Images/luffy.jpg"
+										alt="User Profile"
+										className={styles.userImage}
+									/>
+									<div className={styles.msg}>
+										<div className={styles.usernametype}>
+											<h3>Luffy</h3>
+											<p>One Piece</p>
+										</div>
+										<div className={styles.delivery}>
+											<p>yesterday</p>
+											<p>5:55pm</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className={styles.messageBox}>
+							<div className={styles.username}>
+								<div className={styles.insideUsername}>
+									<img
+										src="/Images/bugatti.jpg"
+										alt="User Profile"
+										className={styles.userImage}
+									/>
+									<div className={styles.msg}>
+										<div className={styles.usernametype}>
+											<h3>Bugatti </h3>
+											<p>hutututu</p>
+										</div>
+										<div className={styles.delivery}>
+											<p>yesterday</p>
+											<p>5:55pm</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div className={styles.messageBox}>
+							<div className={styles.username}>
+								<div className={styles.insideUsername}>
+									<img
+										src="/Images/Cristiano.jpg"
+										alt="User Profile"
+										className={styles.userImage}
+									/>
+									<div className={styles.msg}>
+										<div className={styles.usernametype}>
+											<h3>Ronaldo</h3>
+											<p>Siuuuu</p>
+										</div>
+										<div className={styles.delivery}>
+											<p>yesterday</p>
+											<p>5:55pm</p>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div className={styles.logoutContainer}>
 							<button className={styles.logoutButton}>Logout</button>
 						</div>
