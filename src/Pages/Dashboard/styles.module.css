@@ -37,7 +37,7 @@
 }
 .logoutContainer {
 	display: flex;
-	height: 85vh;
+	height: 55vh;
 	justify-content: center;
 	align-items: flex-end;
 }

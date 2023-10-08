@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import styles from "./styles.module.css";
 import { VscSend } from "react-icons/vsc";
 import { FaBold, FaItalic, FaUnderline, FaRegFile } from "react-icons/fa";
@@ -6,7 +6,16 @@ import { LuPlusCircle } from "react-icons/lu";
 import { ChatContext } from "../../Context/ContextApi";
 function Dashboard() {
 	const { chats, conversations, users } = useContext(ChatContext);
-	console.log(chats, conversations);
+	const [messages, setMessages] = useState([]);
+	const [messageInput, setMessageInput] = useState("");
+
+	const msgHandle = () => {
+		if (messageInput.trim() !== "") {
+			setMessages([...messages, messageInput]);
+			setMessageInput(""); // Clear the input field
+		}
+	};
+
 	return (
 		<div>
 			<div className={styles.dashboardContainer}>
@@ -70,6 +79,12 @@ function Dashboard() {
 						<div>
 							<div className={styles.sender}>hello bugatti!</div>
 							<div className={styles.receiver}>hey luffy!</div>
+
+							{messages.map((message, index) => (
+								<div className={styles.sender} key={index}>
+									{message}
+								</div>
+							))}
 						</div>
 						<div>
 							<div className={styles.chatBoxInput}>
@@ -78,6 +93,8 @@ function Dashboard() {
 									className={styles.inputChat}
 									name="chat"
 									placeholder="Type your message..."
+									onChange={(e) => setMessageInput(e.target.value)}
+									value={messageInput}
 								/>
 							</div>
 							<div className={styles.functionalButton}>
@@ -97,7 +114,7 @@ function Dashboard() {
 									</button>
 								</div>
 								<div className={styles.send}>
-									<button className={styles.button}>
+									<button className={styles.button} onClick={msgHandle}>
 										<VscSend />
 									</button>
 								</div>
