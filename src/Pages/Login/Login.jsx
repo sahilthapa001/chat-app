@@ -3,7 +3,8 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import { ChatContext } from "../../Context/ContextApi";
 import { useForm } from "react-hook-form";
-
+import { HiOutlineMail } from "react-icons/hi";
+import { RiLockPasswordLine } from "react-icons/ri";
 function Login() {
 	const {
 		register,
@@ -42,11 +43,7 @@ function Login() {
 					<h1 className={styles.loginTitle}>Login</h1>
 
 					<div className={styles.inputContainer}>
-						<img
-							src={"/Images/email.png"}
-							alt="email"
-							className={styles.icon}
-						/>
+						<HiOutlineMail className={styles.icon} />
 						<input
 							type="text"
 							name="email"
@@ -56,10 +53,10 @@ function Login() {
 							className={styles.inputField}
 							// required
 						/>
-						{errors.email && <span>Email is required</span>}
+						{errors.email && <div>Email is required</div>}
 					</div>
 					<div className={styles.inputContainer}>
-						<img src={"/Images/pass.png"} alt="pass" className={styles.icon} />
+						<RiLockPasswordLine className={styles.icon} />
 						<input
 							type="password"
 							name="password"
@@ -72,7 +69,11 @@ function Login() {
 						{errors.password && <span>Password is required</span>}
 					</div>
 					<div>
-						<input type="submit" className={styles.gotoDashboardButton} value="Login" />
+						<input
+							type="submit"
+							className={styles.gotoDashboardButton}
+							value="Login"
+						/>
 					</div>
 					<div className={styles.links}>
 						<p className="p">
