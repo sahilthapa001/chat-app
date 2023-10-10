@@ -5,7 +5,7 @@ import { FaBold, FaItalic, FaUnderline, FaRegFile } from "react-icons/fa";
 import { LuPlusCircle } from "react-icons/lu";
 import { ChatContext } from "../../Context/ContextApi";
 function Dashboard() {
-	const { chats, conversations, users } = useContext(ChatContext);
+	const { chats, conversations, users, myUser } = useContext(ChatContext);
 	const [messages, setMessages] = useState([]);
 	const [messageInput, setMessageInput] = useState("");
 
@@ -15,6 +15,7 @@ function Dashboard() {
 			setMessageInput(""); // Clear the input field
 		}
 	};
+	console.log(myUser);
 
 	return (
 		<div>
@@ -28,34 +29,36 @@ function Dashboard() {
 								<h1 className={styles.header}>My Chats</h1>
 								<button className={styles.primaryButton}>
 									<LuPlusCircle />
-								</button>
+								'</button>
 							</div>
 						</div>
-						{users.map((us, index) => {
-							return (
-								<div className={styles.messageBox} key={index}>
-									<div className={styles.username}>
-										<div className={styles.insideUsername}>
-											<img
-												src={us.profileImage}
-												alt="User Profile"
-												className={styles.userImage}
-											/>
-											<div className={styles.msg}>
-												<div className={styles.usernametype}>
-													<h3>{us.name}</h3>
-													{/* <p>One Piece</p> */}
-												</div>
-												<div className={styles.delivery}>
-													{/* <p>yesterday</p>
+						{users
+							.filter((u) => u.id !== myUser.id)
+							.map((us, index) => {
+								return (
+									<div className={styles.messageBox} key={index}>
+										<div className={styles.username}>
+											<div className={styles.insideUsername}>
+												<img
+													src={us.profileImage}
+													alt="User Profile"
+													className={styles.userImage}
+												/>
+												<div className={styles.msg}>
+													<div className={styles.usernametype}>
+														<h3>{us.name}</h3>
+														{/* <p>One Piece</p> */}
+													</div>
+													<div className={styles.delivery}>
+														{/* <p>yesterday</p>
 											<p>5:55pm</p> */}
+													</div>
 												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-							);
-						})}
+								);
+							})}
 
 						<div className={styles.logoutContainer}>
 							<button className={styles.logoutButton}>Logout</button>

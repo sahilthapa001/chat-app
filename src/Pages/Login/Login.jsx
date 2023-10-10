@@ -1,10 +1,29 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
+import { ChatContext } from "../../Context/ContextApi";
+import { useForm } from "react-hook-form";
+
 function Login() {
+	const {
+		register,
+		handleSubmit,
+		watch,
+		formState: { errors },
+	} = useForm();
+	const { auth, setMyUser, users } = useContext(ChatContext);
 	const navigate = useNavigate();
-	const handleLogin = () => {
-		navigate("/Dashboard");
+	const onSubmit = ({ email, password }) => {
+		let real = auth.find((au) => au.email == email);
+		if (!real) {
+			return alert("User doesnt exist!");
+		}
+		if (real.password !== password) {
+			return alert("username or password doesn't match!");
+		}
+		let myUser = users.find((u) => u.id == real.user);
+		setMyUser(myUser);
+		return navigate("/Dashboard");
 	};
 
 	return (
@@ -19,7 +38,7 @@ function Login() {
 						/>
 					</div>
 				</div>
-				<div>
+				<form onSubmit={handleSubmit(onSubmit)}>
 					<h1 className={styles.loginTitle}>Login</h1>
 
 					<div className={styles.inputContainer}>
@@ -30,12 +49,14 @@ function Login() {
 						/>
 						<input
 							type="text"
-							name="username"
-							id="username"
-							placeholder="Enter your username"
+							name="email"
+							id="email"
+							placeholder="Enter your email"
+							{...register("email", { required: true })}
 							className={styles.inputField}
-							required
+							// required
 						/>
+						{errors.email && <span>Email is required</span>}
 					</div>
 					<div className={styles.inputContainer}>
 						<img src={"/Images/pass.png"} alt="pass" className={styles.icon} />
@@ -44,17 +65,14 @@ function Login() {
 							name="password"
 							id="password"
 							placeholder="Enter Password"
+							{...register("password", { required: true })}
 							className={styles.inputField}
 							required
 						/>
+						{errors.password && <span>Password is required</span>}
 					</div>
 					<div>
-						<button
-							onClick={handleLogin}
-							className={styles.gotoDashboardButton}
-						>
-							Login
-						</button>
+						<input type="submit" className={styles.gotoDashboardButton} value="Login" />
 					</div>
 					<div className={styles.links}>
 						<p className="p">
@@ -62,7 +80,7 @@ function Login() {
 							<Link to="/Registration">Sign up</Link>
 						</p>
 					</div>
-				</div>
+				</form>
 			</div>
 		</div>
 	);
