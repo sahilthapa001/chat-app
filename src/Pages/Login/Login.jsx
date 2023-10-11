@@ -28,6 +28,7 @@ function Login() {
 		return navigate("/Dashboard");
 	};
 	useEffect(() => {
+
 		if (localStorage.getItem("myUser")) {
 			let mU = localStorage.getItem("myUser");
 			setMyUser(JSON.parse(mU));
