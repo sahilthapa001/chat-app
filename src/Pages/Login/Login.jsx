@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
 import { ChatContext } from "../../Context/ContextApi";
@@ -23,9 +23,17 @@ function Login() {
 			return alert("username or password doesn't match!");
 		}
 		let myUser = users.find((u) => u.id == real.user);
+		localStorage.setItem("myUser", JSON.stringify(myUser));
 		setMyUser(myUser);
 		return navigate("/Dashboard");
 	};
+	useEffect(() => {
+		if (localStorage.getItem("myUser")) {
+			let mU = localStorage.getItem("myUser");
+			setMyUser(JSON.parse(mU));
+			return navigate("/Dashboard");
+		}
+	}, []);
 
 	return (
 		<div className={styles.loginContainer}>

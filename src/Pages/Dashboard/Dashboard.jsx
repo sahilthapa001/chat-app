@@ -1,21 +1,36 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.css";
 import { VscSend } from "react-icons/vsc";
 import { FaBold, FaItalic, FaUnderline, FaRegFile } from "react-icons/fa";
 import { LuPlusCircle } from "react-icons/lu";
 import { ChatContext } from "../../Context/ContextApi";
+import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-	const { chats, conversations, users, myUser } = useContext(ChatContext);
+	const { chats, setChats, users, myUser, setMyUser } = useContext(ChatContext);
 	const [messages, setMessages] = useState([]);
 	const [messageInput, setMessageInput] = useState("");
+	const chatBoxRef = useRef(null);
+	const navigate = useNavigate();
+
+	// const handleChat = () => {
+	// 	return null
+	// }
+	useEffect(() => {
+		if (!myUser) {
+			return navigate("/");
+		}
+	}, [myUser]);
 
 	const handleSendMessage = () => {
 		if (messageInput.trim() !== "") {
-			setMessages([...messages, messageInput]);
+			setChats((prev) => [...prev, { text: messageInput, date }]);
 			setMessageInput(""); // Clear the input field
 		}
 	};
+	useEffect(() => {
+		chatBoxRef?.current?.scrollIntoView({ behavior: "smooth" });
+	}, [messages, messages.length]);
 
 	return (
 		<div className={styles.dashboardContainer}>
@@ -31,8 +46,9 @@ function Dashboard() {
 							</button>
 						</div>
 					</div>
+
 					{users
-						.filter((u) => u.id !== myUser.id)
+						.filter((u) => u.id !== myUser?.id)
 						.map((us, index) => (
 							<div className={styles.messageBox} key={index}>
 								<div className={styles.username}>
@@ -57,7 +73,15 @@ function Dashboard() {
 							</div>
 						))}
 					<div className={styles.logoutContainer}>
-						<button className={styles.logoutButton}>Logout</button>
+						<button
+							className={styles.logoutButton}
+							onClick={() => {
+								localStorage.removeItem("myUser");
+								setMyUser(null);
+							}}
+						>
+							Logout
+						</button>
 					</div>
 				</div>
 			</div>
@@ -75,13 +99,30 @@ function Dashboard() {
 				<div className={styles.chatSubDetail}>Time Date...</div>
 				<div className={styles.chatBox}>
 					<div className={styles.chatInnerBox}>
-						<div className={styles.sender}>hello bugatti!</div>
-						<div className={styles.receiver}>hey luffy!</div>
-						{messages.map((message, index) => (
-							<div className={styles.sender} key={index}>
-								{message}
-							</div>
-						))}
+						{/* <div className={styles.sender}>hello bugatti!</div>
+						<div className={styles.receiver}>hey luffy!</div> */}
+						{chats.map((message, index) => {
+							let isLast = messages.length == index + 1;
+							return (
+								<div
+									className={`${
+										myUser && myUser.id == message.sender
+											? styles.receiver
+											: styles.sender
+									}`}
+									key={index}
+								>
+									{isLast ? (
+										<div>
+											{message.text}
+											<div ref={chatBoxRef}> </div>
+										</div>
+									) : (
+										message.text
+									)}
+								</div>
+							);
+						})}
 					</div>
 					<div>
 						<div className={styles.chatBoxInput}>
