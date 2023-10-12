@@ -14,9 +14,7 @@ function Dashboard() {
 	const chatBoxRef = useRef(null);
 	const navigate = useNavigate();
 
-	// const handleChat = () => {
-	// 	return null
-	// }
+	
 	useEffect(() => {
 		if (!myUser) {
 			navigate("/");
@@ -27,7 +25,7 @@ function Dashboard() {
 	const handleSendMessage = () => {
 		if (messageInput.trim() !== "") {
 			setChats((prev) => [...prev, { text: messageInput, date }]);
-			setMessageInput(""); // Clear the input field
+			setMessageInput(""); 
 		}
 	};
 	useEffect(() => {
