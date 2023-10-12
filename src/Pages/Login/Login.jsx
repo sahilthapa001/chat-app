@@ -12,7 +12,7 @@ function Login() {
 		watch,
 		formState: { errors },
 	} = useForm();
-	const { auth, setMyUser, users } = useContext(ChatContext);
+	const { auth, setMyUser, users, setSearchUser } = useContext(ChatContext);
 	const navigate = useNavigate();
 	const onSubmit = ({ email, password }) => {
 		let real = auth.find((au) => au.email == email);
@@ -28,10 +28,10 @@ function Login() {
 		return navigate("/Dashboard");
 	};
 	useEffect(() => {
-
 		if (localStorage.getItem("myUser")) {
 			let mU = localStorage.getItem("myUser");
 			setMyUser(JSON.parse(mU));
+			setSearchUser("searched");
 			return navigate("/Dashboard");
 		}
 	}, []);

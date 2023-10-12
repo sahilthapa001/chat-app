@@ -3,7 +3,7 @@ import ChatJson from "../../public/Data/chat.json";
 import ConversationJson from "../../public/Data/conversation.json";
 import UserJson from "../../public/Data/users.json";
 import AuthJson from "../../public/Data/auth.json";
-
+import styles from "./styles.module.css";
 // creating context
 export const ChatContext = createContext();
 
@@ -13,6 +13,7 @@ export const ChatContextProvider = ({ children }) => {
 	const [chats, setChats] = useState([]);
 	const [auth, setAuth] = useState([]);
 	const [myUser, setMyUser] = useState(null);
+	const [searchUser, setSearchUser] = useState("searching");
 
 	const [users, setUsers] = useState([]);
 	const [conversations, setConversations] = useState([]);
@@ -41,9 +42,18 @@ export const ChatContextProvider = ({ children }) => {
 		auth,
 		setMyUser,
 		myUser,
+		searchUser,
+		setSearchUser,
 	};
 	return (
 		<ChatContext.Provider value={providerValue}>
+			<div
+				className={`${
+					searchUser == "searching" ? styles.search : styles.complete
+				}`}
+			>
+				searching
+			</div>
 			{children}
 		</ChatContext.Provider>
 	);

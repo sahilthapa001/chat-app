@@ -7,7 +7,8 @@ import { ChatContext } from "../../Context/ContextApi";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
-	const { chats, setChats, users, myUser, setMyUser } = useContext(ChatContext);
+	const { chats, setChats, users, myUser, setMyUser, setSearchUser } =
+		useContext(ChatContext);
 	const [messages, setMessages] = useState([]);
 	const [messageInput, setMessageInput] = useState("");
 	const chatBoxRef = useRef(null);
@@ -18,7 +19,8 @@ function Dashboard() {
 	// }
 	useEffect(() => {
 		if (!myUser) {
-			return navigate("/");
+			navigate("/");
+			return setSearchUser("searched");
 		}
 	}, [myUser]);
 
